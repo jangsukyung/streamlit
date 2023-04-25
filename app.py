@@ -1,41 +1,25 @@
-# -*- encoding:UTF-8 -*-
-
+# -*- coding:utf-8 -*-
 import streamlit as st
+from utils import html_temp
+from utils import dec_temp
+from eda_app import run_eda_app
+from ml_app import run_ml_app
 
 def main():
-    # title
-    st.title("Hello World")
+    st.markdown(html_temp, unsafe_allow_html = True)
 
-    # text
-    st.text('this is so {}'.format("good"))
+    menu = ['HOME', 'EDA', 'ML', 'About']
+    choice = st.sidebar.selectbox('Menu', menu)
 
-    # Header
-    st.header("This is Header")
+    if choice == 'HOME':
+        st.subheader('HOME')
+        st.markdown(dec_temp, unsafe_allow_html = True)
+    elif choice == 'EDA':
+        run_eda_app()
+    elif choice == 'ML':
+        run_ml_app()
+    else:
+        st.subheader('About')
 
-    # Sub Header
-    st.subheader('This is subHeader')
-
-    # Markdown
-    st.markdown('This is Markdown')
-
-    # 색상이 들어간 텍스트 feature
-    st.success('성공')
-    st.warning('경고')
-    st.info('정보와 관련된 탭')
-    st.error('에러 메세지')
-    st.exception('예외처리')
-
-    # st.write()
-    st.write('일반 텍스트')
-    st.write(1+2)
-    st.write(dir(str))
-
-    st.title(':sunglasses')
-
-    # Help
-    st.help(range)
-    st.help(st.title)
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
